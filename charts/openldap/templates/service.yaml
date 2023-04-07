@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: Service
+metadata:
+{{- if .Values.service.annotations }}
+  annotations:
+{{ toYaml .Values.service.annotations | indent 4 }}
+{{- end }}
+  name: {{ include "openldap.fullname" . }}
+  labels:
+    {{- include "openldap.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  {{- if and (eq .Values.service.type "LoadBalancer") .Values.service.loadBalancerIP }}
+  loadBalancerIP: {{ .Values.service.loadBalancerIP }}
+  {{- end }}
+  {{- if and (eq .Values.service.type "LoadBalancer") .Values.service.loadBalancerSourceRanges }}
+  loadBalancerSourceRanges: {{ toYaml .Values.service.loadBalancerSourceRanges | nindent 4 }}
+  {{- end }}
+  ports:
+    - port: {{ .Values.service.ldapPort }}
+      targetPort: ldap-port
+      protocol: TCP
+      name: ldap-port
+      {{- if and (or (eq .Values.service.type "NodePort") (eq .Values.service.type "LoadBalancer")) (not (empty .Values.service.ldapPortNodePort)) }}
+      nodePort: {{ .Values.service.ldapPortNodePort }}
+      {{- else if eq .Values.service.type "ClusterIP" }}
+      nodePort: null
+      {{- end }}
+    - name: ssl-ldap-port
+      protocol: TCP
+      port: {{ .Values.global.sslLdapPort }}
+      targetPort: ssl-ldap-port
+      {{- if and (or (eq .Values.service.type "NodePort") (eq .Values.service.type "LoadBalancer")) (not (empty .Values.service.sslLdapPortNodePort)) }}
+      nodePort: {{ .Values.service.sslLdapPortNodePort }}
+      {{- else if eq .Values.service.type "ClusterIP" }}
+      nodePort: null
+      {{- end }}
+  sessionAffinity: {{ .Values.service.sessionAffinity }}
+  selector:
+    {{- include "openldap.selectorLabels" . | nindent 4 }}
