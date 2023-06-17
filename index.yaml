@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  fritzbox-dyndns:
+  - apiVersion: v2
+    appVersion: 0.1.4
+    created: "2023-06-17T15:59:12.090821832Z"
+    description: A Helm chart for Kubernetes
+    digest: 03885284264f4b7f2884a989a8f8fffb1e2731ba01f6608cc1cc4da99aca539f
+    name: fritzbox-dyndns
+    type: application
+    urls:
+    - https://github.com/TKlauenberg/helm/releases/download/fritzbox-dyndns-0.1.3/fritzbox-dyndns-0.1.3.tgz
+    version: 0.1.3
+generated: "2023-06-17T15:59:12.090830732Z"
