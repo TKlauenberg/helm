@@ -6,7 +6,7 @@ metadata:
   labels:
     {{- include "fritzbox-dyndns.labels" . | nindent 4 }}
 rules:
-- apiGroups: [""]
+- apiGroups: ["networking.k8s.io"]
   resources: ["ingresses"]
   verbs: ["get", "list"]
 {{- end}}
