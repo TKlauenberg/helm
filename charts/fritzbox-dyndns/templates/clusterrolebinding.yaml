@@ -1,0 +1,16 @@
+{{- if and .Values.rbac.create (not .Values.rbac.namespaced) }}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: {{ include "fritzbox-dyndns.fullname" . }}-clusterrolebinding
+  labels:
+    {{- include "fritzbox-dyndns.labels" . | nindent 4 }}
+subjects:
+  - kind: ServiceAccount
+    name: {{ include "fritzbox-dyndns.serviceAccountName" . }}
+    namespace: {{ include "fritzbox-dyndns.namespace" . }}
+roleRef:
+  kind: ClusterRole
+  name: {{ include "fritzbox-dyndns.fullname" . }}-clusterrole
+  apiGroup: rbac.authorization.k8s.io
+{{- end -}}
