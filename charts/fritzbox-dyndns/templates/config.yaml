@@ -8,8 +8,9 @@ data:
   prod.json: |+
     {
       "kubernetes":{
-      "ingress":{
-        "name": "{{ include "fritzbox-dyndns.fullname" . -}}",
-        "namespace": "{{ include "fritzbox-dyndns.namespace" . }}"
+        "ingress":{
+          "name": "{{ include "fritzbox-dyndns.fullname" . -}}",
+          "namespace": "{{ include "fritzbox-dyndns.namespace" . }}"
+        }
       }
     }
