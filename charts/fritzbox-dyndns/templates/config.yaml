@@ -14,3 +14,7 @@ data:
         }
       }
     }
+  {{- if .Values.customconfig.enabled }}
+  local.json: |+
+    {{ .Values.config | toJson  }}
+  {{- end }}
