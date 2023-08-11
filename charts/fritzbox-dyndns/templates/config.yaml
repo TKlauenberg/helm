@@ -6,11 +6,10 @@ metadata:
     {{- include "fritzbox-dyndns.labels" . | nindent 4 }}
 data:
   prod.json: |+
-  {
-    "kubernetes":{
-    "ingress":{
-      "name": "{{ include "fritzbox-dyndns.fullname" . -}}",
-      "namespace": "{{ include "fritzbox-dyndns.namespace" . }}"
+    {
+      "kubernetes":{
+      "ingress":{
+        "name": "{{ include "fritzbox-dyndns.fullname" . -}}",
+        "namespace": "{{ include "fritzbox-dyndns.namespace" . }}"
+      }
     }
-  }
-{{ toYaml .Values.config | indent 2 }}
