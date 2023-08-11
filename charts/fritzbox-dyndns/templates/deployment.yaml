@@ -50,11 +50,11 @@ spec:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
             - name: config-volume
-              mountPath: "/path/to/mount"  # Specify the path where you want to mount the ConfigMap data
+              mountPath: "/app/config"  # Specify the path where you want to mount the ConfigMap data
       volumes:
         - name: config-volume
           configMap:
-            name: your-configmap-name  # Replace with the actual name of your ConfigMap
+            name: {{ include "fritzbox-dyndns.fullname" . }}-config  # Replace with the actual name of your ConfigMap
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
