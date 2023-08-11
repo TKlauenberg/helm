@@ -38,6 +38,8 @@ spec:
           env:
             - name: NODE_ENV
               value: "prod"
+            - name: NODE_CONFIG_DIR
+              value: "/app/config/base:/app/config/custom"
           livenessProbe:
             httpGet:
               path: /
@@ -50,7 +52,7 @@ spec:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
             - name: config-volume
-              mountPath: "/app/config"  # Specify the path where you want to mount the ConfigMap data
+              mountPath: "/app/config/custom"  # Specify the path where you want to mount the ConfigMap data
       volumes:
         - name: config-volume
           configMap:
