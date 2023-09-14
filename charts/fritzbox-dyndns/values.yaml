@@ -75,3 +75,25 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+customconfig:
+  enabled: false
+
+# write your custom config here
+config: {}
+## default values:
+#  loglevel: info
+#  fritzbox:
+#    user: example
+#    password: password
+#    endpoint: http://fritz.box:49000
+#  dyndns:
+#    user: test
+#    password: password
+#    endpoint: http://example.com
+#  kubernetes:
+#    ingress:
+#      name: test
+#      namespace: test
+#  service:
+#    port: "8080"
