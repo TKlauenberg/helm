@@ -2,6 +2,16 @@ apiVersion: v1
 entries:
   fritzbox-dyndns:
   - apiVersion: v2
+    appVersion: 0.3.19
+    created: "2023-09-14T19:37:31.663116604Z"
+    description: A Helm chart for Kubernetes
+    digest: 44679abb30d5d77c5f4f25e8c672f78f69a9fb1600a01c36bcad7e2e7a827b5e
+    name: fritzbox-dyndns
+    type: application
+    urls:
+    - https://github.com/TKlauenberg/helm/releases/download/fritzbox-dyndns-0.3.21/fritzbox-dyndns-0.3.21.tgz
+    version: 0.3.21
+  - apiVersion: v2
     appVersion: 0.3.18
     created: "2023-09-14T18:59:16.788079277Z"
     description: A Helm chart for Kubernetes
@@ -432,4 +442,4 @@ entries:
     urls:
     - https://github.com/TKlauenberg/helm/releases/download/openldap-0.1.2/openldap-0.1.2.tgz
     version: 0.1.2
-generated: "2023-09-14T18:59:16.788495679Z"
+generated: "2023-09-14T19:37:31.66374496Z"
