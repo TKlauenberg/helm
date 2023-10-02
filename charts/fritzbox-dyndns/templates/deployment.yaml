@@ -6,6 +6,9 @@ metadata:
     {{- include "fritzbox-dyndns.labels" . | nindent 4 }}
 spec:
   replicas: 1
+  # on update the pod must be terminated before the new pod is created
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       {{- include "fritzbox-dyndns.selectorLabels" . | nindent 6 }}
