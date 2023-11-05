@@ -1,0 +1,130 @@
+# Default values for keycloak.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: quay.io/keycloak/keycloak
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+
+keycloak:
+  # -- Enable this if the Keycloak image has clustering enabled, needs to be true even if number of replicas is 1
+  clustered: true
+  # -- The arguments passed to the entrypoint in the Keycloak container (normally this will be kc.sh)
+  args: []
+  # -- The URL path used by readiness checks
+  healthCheckPath: /realms/master
+  # -- Set logging level for Keycloak
+  logLevel: INFO
+  # -- The name of the primary admin user added to Keycloak at first startup
+  adminUser: admin
+  # -- Secret containing the password for the primary admin user
+  adminPasswordSecret:
+    name: ""
+    key: ""
+  # -- The port used for HTTP access
+  httpPort: 8080
+  # -- The proxy forwarding mode
+  proxyMode: edge
+  # -- Enable or disable HTTP
+  httpEnabled: true
+  # -- Enable or disable strict checking of the host
+  hostnameStrict: false
+  # -- Enable or disable strict checking of the TLS certificate
+  hostnameStrictHttps: false
+  # -- This should be set if proxy uses a different context path for Keycloak
+  hostnamePath: ""
+  # -- Append settings to the startup via JAVA_OPTS_APPEND
+  javaOptsAppend: ""
+  # -- Extra environment variables to set in the pod
+  extraEnv:
+    # FOO: BAR
+  # -- Extra environment variables to set from secrets
+  extraEnvSecret:
+    # FOO:
+    #   secretName: foo-secret
+    #   secretKey: foo
+
+  database:
+    # -- External database: reference to the secret containing the DB password
+    passwordSecret:
+      # Tip: use `extraSecrets` and template the value here as "{{ .Release.Name }}-{{ .Chart.Name }}-database"
+      name: ""
+      key: ""
+    # -- External database: DB username
+    username: ""
+    # -- External database: hostname of the database
+    host: ""
+    # -- External database: DB name
+    databaseName: ""
+    # -- External database: extra properties to add to the JDBC URL
+    properties: ""
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: chart-example.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
