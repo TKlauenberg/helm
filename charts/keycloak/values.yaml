@@ -93,6 +93,7 @@ securityContext: {}
 service:
   type: ClusterIP
   port: 80
+  httpsPort: 443
 
 ingress:
   enabled: false
