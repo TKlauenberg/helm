@@ -11,9 +11,5 @@ spec:
       targetPort: 8080
       protocol: TCP
       name: http
-    - port: {{ .Values.service.httpsPort }}
-      targetPort: 8443
-      protocol: TCP
-      name: https
   selector:
     {{- include "keycloak.selectorLabels" . | nindent 4 }}
