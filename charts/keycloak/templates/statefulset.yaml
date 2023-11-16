@@ -58,7 +58,6 @@ spec:
             - name: KC_HOSTNAME_PATH
               value: {{ .Values.keycloak.hostnamePath | quote }}
             {{- end }}
-
             - name: KEYCLOAK_ADMIN_PASSWORD
               valueFrom:
                 secretKeyRef:
@@ -100,8 +99,10 @@ spec:
               {{- else }}
               value: {{ .Values.keycloak.javaOptsAppend | quote }}
               {{- end }}
-            # other envs
-            {{- range $k, $v := .Values.keycloak.extraEnv }}
+            {{- with .Values.keycloak.extraEnv }}
+            # Extra environment variables from .Values.keycloak.extraEnv
+            {{- toYaml . | nindent 12 }}
+            {{- end }}
           ports:
             - name: http
               containerPort: 8080
