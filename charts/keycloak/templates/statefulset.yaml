@@ -52,8 +52,8 @@ spec:
               value: {{ .Values.keycloak.httpEnabled | quote }}
             - name: KC_HOSTNAME_STRICT
               value: {{ .Values.keycloak.hostnameStrict | quote }}
-            - name: KC_HOSTNAME_STRICT_HTTPS
-              value: {{ .Values.keycloak.hostnameStrictHttps | quote }}
+            - name: KC_HOSTNAME
+              value: {{ .Values.keycloak.hostname | quote }}
             {{- if .Values.keycloak.hostnamePath }}
             - name: KC_HOSTNAME_PATH
               value: {{ .Values.keycloak.hostnamePath | quote }}
@@ -100,6 +100,8 @@ spec:
               {{- else }}
               value: {{ .Values.keycloak.javaOptsAppend | quote }}
               {{- end }}
+            # other envs
+            {{- range $k, $v := .Values.keycloak.extraEnv }}
           ports:
             - name: http
               containerPort: 8080
