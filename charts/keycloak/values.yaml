@@ -94,6 +94,10 @@ service:
   type: ClusterIP
   port: 80
   httpsPort: 443
+  targetPort: 8086
+  annotations: {}
+  labels: {}
+  portName: http
 
 ingress:
   enabled: false
