@@ -26,18 +26,10 @@ keycloak:
   adminPasswordSecret:
     name: ""
     key: ""
-  # -- The port used for HTTP access
-  httpPort: 8080
   # -- The proxy forwarding mode
   proxyMode: edge
-  # -- Enable or disable HTTP
-  httpEnabled: true
-  # -- Enable or disable strict checking of the host
-  hostnameStrict: false
   # -- The hostname used for Keycloak
   hostname: keycloak.cluster.local
-  # -- This should be set if proxy uses a different context path for Keycloak
-  hostnamePath: ""
   # -- Append settings to the startup via JAVA_OPTS_APPEND
   javaOptsAppend: ""
   # -- Extra environment variables to set in the pod

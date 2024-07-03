@@ -46,18 +46,8 @@ spec:
             {{- end }}
             - name: KC_PROXY
               value: {{ .Values.keycloak.proxyMode | quote }}
-            - name: KC_HTTP_PORT
-              value: {{ .Values.keycloak.httpPort | quote }}
-            - name: KC_HTTP_ENABLED
-              value: {{ .Values.keycloak.httpEnabled | quote }}
-            - name: KC_HOSTNAME_STRICT
-              value: {{ .Values.keycloak.hostnameStrict | quote }}
             - name: KC_HOSTNAME
               value: {{ .Values.keycloak.hostname | quote }}
-            {{- if .Values.keycloak.hostnamePath }}
-            - name: KC_HOSTNAME_PATH
-              value: {{ .Values.keycloak.hostnamePath | quote }}
-            {{- end }}
             - name: KEYCLOAK_ADMIN_PASSWORD
               valueFrom:
                 secretKeyRef:
