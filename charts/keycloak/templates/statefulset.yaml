@@ -58,7 +58,10 @@ spec:
                   name: {{ include "keycloak.fullname" . }}-admin
                   key: password
                 {{- end }}
-
+            {{- if .Values.keycloak.features }}
+            - name: KEYCLOAK_FEATURES
+              value: {{ .Values.keycloak.features | quote }}
+            {{- end }}
             {{- if .Values.keycloak.database.username }}
             - name: KC_DB_USERNAME
               value: {{ .Values.keycloak.database.username | quote }}
