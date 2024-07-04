@@ -30,8 +30,6 @@ keycloak:
   proxyMode: edge
   # -- The hostname used for Keycloak
   hostname: keycloak.cluster.local
-  # -- The features to install in Keycloak (comma separated list)
-  features: ""
   # -- Append settings to the startup via JAVA_OPTS_APPEND
   javaOptsAppend: ""
   # -- Extra environment variables to set in the pod
