@@ -59,7 +59,7 @@ spec:
                   key: password
                 {{- end }}
             {{- if .Values.keycloak.features }}
-            - name: KEYCLOAK_FEATURES
+            - name: KC_FEATURES
               value: {{ .Values.keycloak.features | quote }}
             {{- end }}
             {{- if .Values.keycloak.database.username }}
