@@ -33,8 +33,5 @@ spec:
       protocol: TCP
       targetPort: https
     {{- end }}
-  {{- if .Values.extraExposePorts }}
-  {{- tpl (toYaml .Values.extraExposePorts) . | indent 4 }}
-  {{- end }}
   selector:
     {{- include "keycloak.selectorLabels" . | nindent 4 }}
