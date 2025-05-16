@@ -9,17 +9,17 @@ spec:
   type: ClusterIP
   ports:
     - name: metrics
-      port: {{ .Values.metrics.service.ports.metrics }}
+      port: 9000
       protocol: TCP
-      targetPort: {{ .Values.containerPorts.metrics }}
+      targetPort: 9000
     - name: http
-      port: {{ .Values.metrics.service.ports.http }}
+      port: 8080
       protocol: TCP
-      targetPort: {{ .Values.containerPorts.http }}
+      targetPort: 8080
     {{- if .Values.tls.enabled }}
     - name: https
-      port: {{ .Values.metrics.service.ports.https }}
+      port: 8443
       protocol: TCP
-      targetPort: {{ .Values.containerPorts.https }}
+      targetPort: 8443
     {{- end }}
 {{- end }}
