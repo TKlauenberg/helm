@@ -88,7 +88,7 @@ spec:
               value: /keycloak/certs/tls.key
             {{- end }}
             - name: KEYCLOAK_ENABLE_STATISTICS
-              value: true
+              value: "true"
             - name: JAVA_OPTS_APPEND
               {{- if .Values.keycloak.clustered }}
               value: "-Djgroups.dns.query={{ include "keycloak.fullname" . }}-headless {{ .Values.keycloak.javaOptsAppend }}"
