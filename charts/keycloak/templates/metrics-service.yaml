@@ -1,0 +1,25 @@
+{{- if .Values.metrics.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ printf "%s-metrics" (include "keycloak.fullname" .) | trunc 63 | trimSuffix "-" }}
+  labels:
+    {{- include "keycloak.labels" . | nindent 4 }}
+spec:
+  type: ClusterIP
+  ports:
+    - name: metrics
+      port: {{ .Values.metrics.service.ports.metrics }}
+      protocol: TCP
+      targetPort: {{ .Values.containerPorts.metrics }}
+    - name: http
+      port: {{ .Values.metrics.service.ports.http }}
+      protocol: TCP
+      targetPort: {{ .Values.containerPorts.http }}
+    {{- if .Values.tls.enabled }}
+    - name: https
+      port: {{ .Values.metrics.service.ports.https }}
+      protocol: TCP
+      targetPort: {{ .Values.containerPorts.https }}
+    {{- end }}
+{{- end }}

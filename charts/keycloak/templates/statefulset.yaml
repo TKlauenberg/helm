@@ -100,12 +100,18 @@ spec:
             {{- end }}
           ports:
             - name: http
-            {{- if .Values.ingress.tls.enabled }}
-              containerPort: 8443
-            {{- else }}
-              containerPort: 8080
-            {{- end }}
+              containerPort: {{ .Values.containerPorts.http }}
               protocol: TCP
+            {{- if .Values.tls.enabled }}
+            - name: https
+              containerPort: {{ .Values.containerPorts.https }}
+              protocol: TCP
+            {{- end }}
+            {{- if and (.Values.metrics.enabled) (not (eq (.Values.containerPorts.http | int) (.Values.containerPorts.metrics | int) )) }}
+            - name: metrics
+              containerPort: {{ .Values.containerPorts.metrics }}
+              protocol: TCP
+            {{- end}}
           readinessProbe:
             httpGet:
               path: /realms/master
