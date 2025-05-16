@@ -103,7 +103,7 @@ spec:
             - name: http
               containerPort: 8080
               protocol: TCP
-            {{- if .Values.tls.enabled }}
+            {{- if .Values.ingress.tls.enabled }}
             - name: https
               containerPort: 8443
               protocol: TCP
