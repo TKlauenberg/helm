@@ -102,7 +102,10 @@ ingress:
       paths:
         - path: /
           pathType: ImplementationSpecific
-  tls: []
+  tls:
+    enabled: false
+    secretName: ""
+    # host is used from keycloak value
   #  - secretName: chart-example-tls
   #    hosts:
   #      - chart-example.local
