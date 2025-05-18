@@ -118,11 +118,7 @@ spec:
           readinessProbe:
             httpGet:
               path: /realms/master
-              {{- if .Values.ingress.tls.enabled }}
-              port: 8443
-              {{- else }}
               port: 8080
-              {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
