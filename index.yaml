@@ -534,6 +534,16 @@ entries:
   keycloak:
   - apiVersion: v2
     appVersion: 26.2.4
+    created: "2025-05-18T17:23:37.690679713Z"
+    description: A Helm chart for Kubernetes
+    digest: f67ac3d7998ea4674fcb93ae54636a162122e92fe6a48eb4166cc71b3fabfd40
+    name: keycloak
+    type: application
+    urls:
+    - https://github.com/TKlauenberg/helm/releases/download/keycloak-0.4.15/keycloak-0.4.15.tgz
+    version: 0.4.15
+  - apiVersion: v2
+    appVersion: 26.2.4
     created: "2025-05-18T13:49:57.103870359Z"
     description: A Helm chart for Kubernetes
     digest: 2dc2ea1f2e8cbe1b7126942ff523038ca8738b1744f8dfce6b12c4f1bb12d876
@@ -883,4 +893,4 @@ entries:
     urls:
     - https://github.com/TKlauenberg/helm/releases/download/openldap-0.1.2/openldap-0.1.2.tgz
     version: 0.1.2
-generated: "2025-05-18T17:19:38.458157706Z"
+generated: "2025-05-18T17:23:37.690996073Z"
