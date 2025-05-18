@@ -79,12 +79,6 @@ spec:
                   name: {{ tpl .Values.keycloak.database.passwordSecret.name . }}
                   key: {{ .Values.keycloak.database.passwordSecret.key }}
             {{- end }}
-            {{- if .Values.ingress.tls.enabled }}
-            - name: KC_HTTPS_CERTIFICATE_FILE
-              value: /keycloak/certs/tls.crt
-            - name: KC_HTTPS_CERTIFICATE_KEY_FILE
-              value: /keycloak/certs/tls.key
-            {{- end }}
             - name: KEYCLOAK_ENABLE_STATISTICS
               value: "true"
             - name: JAVA_OPTS_APPEND
