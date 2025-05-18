@@ -113,7 +113,7 @@ spec:
             - name: metrics
               containerPort: 9000
               protocol: TCP
-            startupProbe:
+          startupProbe:
             httpGet:
               path: /health/started
               port: 9000
