@@ -26,8 +26,6 @@ keycloak:
   adminPasswordSecret:
     name: ""
     key: ""
-  # -- The proxy forwarding mode
-  proxyMode: edge
   # -- The hostname used for Keycloak
   hostname: keycloak.cluster.local
   # -- Append settings to the startup via JAVA_OPTS_APPEND

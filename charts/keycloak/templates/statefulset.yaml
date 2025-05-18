@@ -44,8 +44,6 @@ spec:
             - name: KEYCLOAK_ADMIN
               value: {{ .Values.keycloak.adminUser | quote }}
             {{- end }}
-            - name: KC_PROXY
-              value: {{ .Values.keycloak.proxyMode | quote }}
             - name: KC_HOSTNAME
               value: {{ .Values.keycloak.hostname | quote }}
             - name: KEYCLOAK_ADMIN_PASSWORD
@@ -97,6 +95,13 @@ spec:
               {{- end }}
             - name: KC_HTTP_ENABLED
               value: "true"
+            - name: KC_PROXY_HEADERS
+              value: "xforwarded"
+            # Passing the Pod's IP primary address to the JGroups clustering as this is required in IPv6 only setups
+            - name: POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
             {{- with .Values.keycloak.extraEnv }}
             # Extra environment variables from .Values.keycloak.extraEnv
             {{- toYaml . | nindent 12 }}
@@ -105,37 +110,23 @@ spec:
             - name: http
               containerPort: 8080
               protocol: TCP
-            {{- if .Values.ingress.tls.enabled }}
-            - name: https
-              containerPort: 8443
-              protocol: TCP
-            {{- end }}
-            {{- if and (.Values.metrics.enabled) (not (eq (.Values.containerPorts.http | int) (.Values.containerPorts.metrics | int) )) }}
             - name: metrics
               containerPort: 9000
               protocol: TCP
-            {{- end}}
+          startupProbe:
+            httpGet:
+              path: /health/started
+              port: 9000
           readinessProbe:
             httpGet:
-              path: /realms/master
-              port: 8080
+              path: /health/ready
+              port: 9000
+          livenessProbe:
+            httpGet:
+              path: /health/live
+              port: 9000
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-          volumeMounts:
-            {{- if .Values.ingress.tls.enabled }}
-            - name: certificates
-              mountPath: /keycloak/certs
-              readOnly: true
-            {{- end }}
-      volumes:
-        - name: empty-dir
-          emptyDir: {}
-        {{- if .Values.ingress.tls.enabled }}
-        - name: certificates
-          secret:
-            secretName: {{ .Values.ingress.tls.secretName }}
-            defaultMode: 420
-        {{- end }}
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}

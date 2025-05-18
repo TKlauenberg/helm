@@ -27,11 +27,5 @@ spec:
       port: {{ .Values.service.port }}
       protocol: TCP
       targetPort: http
-    {{- if .Values.ingress.tls.enabled }}
-    - name: https
-      port: {{ .Values.service.httpsPort }}
-      protocol: TCP
-      targetPort: https
-    {{- end }}
   selector:
     {{- include "keycloak.selectorLabels" . | nindent 4 }}
