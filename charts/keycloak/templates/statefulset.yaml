@@ -95,6 +95,8 @@ spec:
               {{- else }}
               value: {{ .Values.keycloak.javaOptsAppend | quote }}
               {{- end }}
+            - name: KC_HTTP_ENABLED
+              value: "true"
             {{- with .Values.keycloak.extraEnv }}
             # Extra environment variables from .Values.keycloak.extraEnv
             {{- toYaml . | nindent 12 }}
