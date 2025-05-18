@@ -24,12 +24,12 @@ spec:
 {{- end }}
   ports:
     - name: http
-      port: 8080
+      port: {{ .Values.service.port }}
       protocol: TCP
       targetPort: http
     {{- if .Values.ingress.tls.enabled }}
     - name: https
-      port: 8443
+      port: {{ .Values.service.httpsPort }}
       protocol: TCP
       targetPort: https
     {{- end }}
